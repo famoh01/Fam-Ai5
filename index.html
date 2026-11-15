@@ -1,0 +1,1918 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Fam Ai ข่าวสด — ไฟล์เดียวจบ สำหรับ GitHub Pages (single file) -->
+<title>Fam Ai ข่าวสด | ทันทุกสถานการณ์ คัดลอกง่ายในคลิกเดียว</title>
+<meta name="description" content="Fam Ai สำนักข่าวสดออนไลน์ รวมข่าวด่วน ประเด็นร้อน พร้อมระบบตัดกอง คัดลอกข่าว-แฮชแท็กได้ในคลิกเดียว และภาพประกอบทุกข่าว">
+<meta property="og:title" content="Fam Ai ข่าวสด">
+<meta property="og:description" content="ข่าวสด ทันทุกสถานการณ์ ระบบตัดกอง + คัดลอกง่ายในคลิกเดียว">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23e11d2e'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+<style>
+/* ============ Fam Ai ข่าวสด — style.css ============ */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Sarabun:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e5e9f2;
+  --brand: #e11d2e;
+  --brand2: #ff7a18;
+  --navy: #0b1220;
+  --navy2: #13203a;
+  --grad: linear-gradient(135deg, #ff3b4e, #ff7a18);
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(15, 23, 42, .08);
+  --shadow-lg: 0 22px 50px rgba(15, 23, 42, .18);
+  --font: 'Sarabun', 'Kanit', 'Noto Sans Thai', 'Prompt', system-ui, 'Segoe UI', Tahoma, sans-serif;
+  --font-head: 'Kanit', 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea, select { font-family: inherit; font-size: 1rem; }
+
+.wrap { width: min(1240px, 94vw); margin-inline: auto; }
+
+h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.3; }
+
+/* ---------- ปุ่ม ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+  padding: .58rem 1.05rem; border-radius: 12px; border: 1.5px solid var(--line);
+  background: var(--card); color: var(--ink); font-size: .93rem; font-weight: 600;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, opacity .15s;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(15,23,42,.12); }
+.btn:active { transform: translateY(0); }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn-brand { background: var(--grad); border-color: transparent; color: #fff; }
+.btn-ghost { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.28); color: #fff; }
+.btn-ghost:hover { background: rgba(255,255,255,.18); }
+.btn-light { background: #fff; border-color: #fff; color: var(--ink); }
+.btn-block { width: 100%; }
+.btn.small { padding: .38rem .75rem; font-size: .84rem; border-radius: 10px; }
+
+.icon-btn {
+  width: 38px; height: 38px; border-radius: 11px; border: 1.5px solid var(--line);
+  background: var(--card); font-size: 1.05rem; color: var(--muted);
+}
+.icon-btn:hover { background: var(--bg); color: var(--ink); }
+
+/* ---------- แถบเวลา ---------- */
+.topline { background: var(--navy); color: #cbd5e1; font-size: .84rem; }
+.topline-inner { display: flex; justify-content: space-between; align-items: center; padding: .42rem 0; gap: 1rem; flex-wrap: wrap; }
+.clock { letter-spacing: .2px; }
+.topline-right { display: inline-flex; align-items: center; gap: .5rem; }
+
+.live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--brand); display: inline-block; animation: blink 1.2s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+
+/* ---------- หัวเว็บ ---------- */
+.site-header {
+  background: radial-gradient(1100px 300px at 85% -40%, rgba(255,122,24,.22), transparent 60%),
+              radial-gradient(900px 260px at 8% -30%, rgba(225,29,46,.28), transparent 60%),
+              linear-gradient(180deg, var(--navy2), var(--navy));
+  color: #fff; position: sticky; top: 0; z-index: 60; box-shadow: 0 10px 30px rgba(2,6,23,.35);
+}
+.header-inner { display: flex; align-items: center; gap: 1.15rem; padding: .85rem 0; }
+
+.brand { display: inline-flex; align-items: center; gap: .7rem; }
+.brand-mark { width: 50px; height: 50px; flex: 0 0 auto; }
+.brand-mark.small { width: 42px; height: 42px; }
+.logo-svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 14px rgba(225,29,46,.35)); }
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-text strong { font-family: var(--font-head); font-size: 1.55rem; font-weight: 800; letter-spacing: .3px; }
+.brand-text strong em { font-style: normal; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.brand-text small { font-size: .72rem; color: #94a3b8; letter-spacing: 1.6px; text-transform: uppercase; }
+
+.main-nav { display: flex; gap: .15rem; flex-wrap: wrap; margin-inline-start: .5rem; }
+.main-nav a {
+  padding: .45rem .85rem; border-radius: 999px; font-size: .92rem; font-weight: 500;
+  color: #cbd5e1; transition: background .15s, color .15s;
+}
+.main-nav a:hover { background: rgba(255,255,255,.12); color: #fff; }
+.main-nav a.active { background: var(--grad); color: #fff; font-weight: 700; }
+
+.header-actions { display: flex; align-items: center; gap: .55rem; margin-inline-start: auto; }
+.search-box {
+  display: flex; align-items: center; background: rgba(255,255,255,.1);
+  border: 1.5px solid rgba(255,255,255,.22); border-radius: 12px; padding: .22rem .22rem .22rem .85rem;
+}
+.search-box input {
+  background: transparent; border: 0; outline: 0; color: #fff; width: 190px; font-size: .92rem;
+}
+.search-box input::placeholder { color: #94a3b8; }
+.search-btn {
+  border: 0; border-radius: 9px; padding: .42rem .95rem; font-weight: 700; font-size: .88rem;
+  background: var(--grad); color: #fff;
+}
+
+.menu-toggle {
+  display: none; background: rgba(255,255,255,.12); color: #fff; border: 1.5px solid rgba(255,255,255,.25);
+  border-radius: 11px; width: 42px; height: 42px; font-size: 1.25rem;
+}
+
+/* ---------- ข่าวด่วนวิ่ง ---------- */
+.breaking-bar { background: linear-gradient(90deg, #9f1220, var(--brand) 45%, #ff5f2e); color: #fff; }
+.breaking-inner { display: flex; align-items: center; gap: 1rem; padding: .55rem 0; overflow: hidden; }
+.breaking-label {
+  display: inline-flex; align-items: center; gap: .5rem; flex: 0 0 auto;
+  background: rgba(0,0,0,.28); padding: .32rem .95rem; border-radius: 999px;
+  font-weight: 700; font-size: .88rem; letter-spacing: .4px;
+}
+.pulse {
+  width: 9px; height: 9px; border-radius: 50%; background: #fff; display: inline-block;
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,.6); }
+  70% { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+.ticker { overflow: hidden; flex: 1; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent); }
+.ticker-track { display: flex; gap: 2.4rem; width: max-content; animation: marquee 42s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: .6rem; white-space: nowrap;
+  font-weight: 600; font-size: .95rem; color: #fff; opacity: .96;
+}
+.ticker-item:hover { text-decoration: underline; }
+.ticker-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; opacity: .85; flex: 0 0 auto; }
+
+/* ---------- Hero ---------- */
+.hero { margin-top: 1.6rem; }
+.hero-card {
+  position: relative; border-radius: 24px; overflow: hidden; min-height: 430px;
+  display: flex; align-items: flex-end; box-shadow: var(--shadow-lg);
+}
+.hero-card img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,12,24,.05) 25%, rgba(8,12,24,.62) 62%, rgba(8,12,24,.92));
+}
+.hero-body { position: relative; padding: 2rem clamp(1.2rem, 3.5vw, 2.6rem); color: #fff; width: 100%; }
+.hero-badges { display: flex; gap: .55rem; margin-bottom: .8rem; flex-wrap: wrap; }
+.hero-body h1 {
+  font-size: clamp(1.55rem, 3.4vw, 2.55rem); font-weight: 800; margin-bottom: .55rem;
+  text-shadow: 0 4px 22px rgba(0,0,0,.4);
+}
+.hero-body p { max-width: 780px; color: #e2e8f0; font-size: 1.04rem; margin-bottom: .8rem; }
+.hero-meta { color: #94a3b8; font-size: .88rem; margin-bottom: 1.05rem; }
+.hero-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+/* ---------- ชิป / แท็ก ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: .35rem; padding: .32rem .95rem;
+  border-radius: 999px; border: 1.5px solid var(--line); background: var(--card);
+  font-size: .86rem; font-weight: 600; color: var(--ink); transition: all .15s;
+}
+.chip:hover { border-color: var(--brand); color: var(--brand); }
+.chip.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.chip.cat {
+  background: var(--c, var(--brand)); border-color: transparent; color: #fff;
+  font-size: .78rem; padding: .26rem .8rem; letter-spacing: .3px;
+}
+.badge-live {
+  display: inline-flex; align-items: center; gap: .42rem; background: var(--brand);
+  color: #fff; font-size: .78rem; font-weight: 700; padding: .28rem .85rem; border-radius: 999px;
+  letter-spacing: .4px;
+}
+.badge-live .pulse { background: #fff; width: 8px; height: 8px; }
+
+.tag {
+  display: inline-flex; align-items: center; padding: .22rem .72rem; border-radius: 999px;
+  background: #f1f5f9; border: 1px solid transparent; color: #334155;
+  font-size: .82rem; font-weight: 500; transition: all .15s;
+}
+button.tag:hover { background: var(--ink); color: #fff; }
+.tag.more { background: transparent; color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: .42rem; }
+
+/* ---------- โครงสร้างหลัก ---------- */
+.layout {
+  display: grid; grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 1.7rem; margin-top: 2rem; align-items: start;
+}
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap; margin-bottom: 1.15rem;
+}
+.section-head h2 { font-size: 1.45rem; font-weight: 700; display: flex; align-items: baseline; gap: .55rem; }
+.section-head .count, .count { color: var(--muted); font-size: .95rem; font-weight: 500; }
+.chip-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* ---------- การ์ดข่าว ---------- */
+.grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+  gap: 1.35rem;
+}
+.card {
+  background: var(--card); border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); display: flex; flex-direction: column;
+  transition: transform .22s ease, box-shadow .22s ease;
+  animation: rise .45s ease both;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.card-media { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; }
+.card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.card:hover .card-media img { transform: scale(1.06); }
+.card-media .chip.cat { position: absolute; top: .85rem; left: .85rem; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+.card-media .badge-live { position: absolute; top: .85rem; right: .85rem; box-shadow: 0 6px 16px rgba(225,29,46,.4); }
+
+.card-body { padding: 1.05rem 1.15rem 1.2rem; display: flex; flex-direction: column; gap: .62rem; flex: 1; }
+.meta { color: var(--muted); font-size: .82rem; }
+.card-title { font-size: 1.12rem; font-weight: 700; }
+.excerpt { color: #475569; font-size: .93rem; flex: 1; }
+.card-actions { display: flex; gap: .45rem; flex-wrap: wrap; margin-top: .3rem; }
+.card-actions .btn { padding: .45rem .82rem; font-size: .84rem; }
+
+/* ---------- Sidebar ---------- */
+.sidebar { display: flex; flex-direction: column; gap: 1.25rem; position: sticky; top: 96px; }
+.panel {
+  background: var(--card); border-radius: var(--radius); padding: 1.25rem 1.3rem;
+  box-shadow: var(--shadow);
+}
+.panel-title {
+  font-size: 1.08rem; font-weight: 700; margin-bottom: .95rem;
+  display: flex; align-items: center; gap: .55rem;
+}
+.panel-title small { color: var(--muted); font-size: .78rem; font-weight: 400; margin-inline-start: auto; }
+.panel-icon.red { filter: none; }
+.panel-about p { font-size: .92rem; color: #475569; margin-bottom: .95rem; }
+
+.breaking-list { list-style: none; counter-reset: bl; display: flex; flex-direction: column; gap: .85rem; }
+.breaking-list li {
+  counter-increment: bl; display: flex; gap: .75rem; align-items: flex-start;
+  padding-bottom: .85rem; border-bottom: 1px dashed var(--line);
+}
+.breaking-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.breaking-list li::before {
+  content: counter(bl); flex: 0 0 28px; height: 28px; border-radius: 9px;
+  background: var(--grad); color: #fff; font-weight: 700; font-size: .85rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.breaking-list a { font-size: .92rem; font-weight: 600; line-height: 1.5; }
+.breaking-list a:hover { color: var(--brand); }
+.breaking-list .bl-time { display: block; color: var(--muted); font-size: .78rem; font-weight: 400; margin-top: .18rem; }
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: .45rem; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.stat {
+  background: var(--bg); border-radius: 14px; padding: .85rem .6rem; text-align: center;
+  border: 1px solid var(--line);
+}
+.stat b { display: block; font-family: var(--font-head); font-size: 1.55rem; font-weight: 800; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stat span { color: var(--muted); font-size: .82rem; }
+
+/* ---------- แถบแฮชแท็ก ---------- */
+.tag-band {
+  margin-top: 3.2rem; padding: 2.6rem 0 2.9rem;
+  background:
+    radial-gradient(900px 260px at 12% -40%, rgba(225,29,46,.32), transparent 60%),
+    radial-gradient(900px 300px at 90% 130%, rgba(255,122,24,.28), transparent 60%),
+    linear-gradient(135deg, var(--navy2), var(--navy));
+  color: #fff;
+}
+.tag-band h2 { font-size: 1.55rem; margin-bottom: 1.15rem; }
+.tag-band h2 small { font-size: .88rem; color: #94a3b8; font-weight: 400; margin-inline-start: .65rem; }
+.tag-band-list { display: flex; flex-wrap: wrap; gap: .65rem; margin-bottom: 1.45rem; }
+.tag-band .tag {
+  background: rgba(255,255,255,.1); border: 1.5px solid rgba(255,255,255,.22);
+  color: #fff; font-size: .95rem; padding: .48rem 1.15rem; font-weight: 600;
+}
+button.tag:hover { background: var(--brand); border-color: var(--brand); }
+
+/* ---------- ท้ายเว็บ ---------- */
+.site-footer { background: #0a0f1c; color: #94a3b8; padding: 3rem 0 1.6rem; margin-top: 0; }
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.1fr;
+  gap: 2rem; padding-bottom: 2.2rem; border-bottom: 1px solid rgba(255,255,255,.09);
+}
+.footer-brand { margin-bottom: .95rem; }
+.footer-brand .brand-text strong { color: #fff; }
+.footer-brand .brand-text small { color: #64748b; letter-spacing: 1px; }
+.footer-desc { font-size: .92rem; line-height: 1.8; }
+.site-footer h4 { color: #fff; font-size: 1.02rem; margin-bottom: .9rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; font-size: .92rem; }
+.footer-links a:hover { color: #fff; }
+.footer-bottom { padding-top: 1.5rem; font-size: .84rem; text-align: center; color: #64748b; }
+
+/* ---------- โมดัล ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(8, 12, 24, .62); backdrop-filter: blur(6px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem) 1rem; overflow-y: auto;
+}
+.modal-card {
+  background: var(--card); border-radius: 22px; width: min(980px, 100%);
+  box-shadow: var(--shadow-lg); position: relative; animation: rise .28s ease both;
+}
+.reader-card { width: min(820px, 100%); padding: clamp(1.2rem, 3.5vw, 2.4rem); }
+.modal-close { position: absolute; top: 1rem; right: 1rem; z-index: 5; }
+
+.reader-media { position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 1.15rem; }
+.reader-media img { width: 100%; max-height: 420px; object-fit: cover; }
+.reader-media .chip.cat { position: absolute; top: .95rem; left: .95rem; }
+.reader-meta { color: var(--muted); font-size: .88rem; margin-bottom: .55rem; }
+.reader-title { font-size: clamp(1.45rem, 3vw, 2.15rem); font-weight: 800; margin-bottom: .85rem; }
+.reader-lead {
+  font-size: 1.12rem; font-weight: 600; color: #334155;
+  border-left: 5px solid var(--brand); padding-left: 1rem; margin-bottom: 1.35rem;
+}
+.reader-body p { margin-bottom: 1.15rem; font-size: 1.04rem; color: #263244; }
+.reader-tags { margin: 1.35rem 0 1.15rem; }
+.share-row { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; margin-top: 1.15rem; padding-top: 1.15rem; border-top: 1px dashed var(--line); color: var(--muted); font-size: .92rem; }
+.btn.share.line { background: #06c755; border-color: #06c755; color: #fff; }
+.btn.share.fb { background: #1877f2; border-color: #1877f2; color: #fff; }
+.btn.share.x { background: #0f172a; border-color: #0f172a; color: #fff; }
+
+/* ---------- ตัดกอง ---------- */
+.desk-card { width: min(1180px, 100%); }
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 1.35rem 1.75rem; border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, #fff7ed, #fff);
+  border-radius: 22px 22px 0 0;
+}
+.modal-head h2 { font-size: 1.35rem; display: flex; align-items: baseline; gap: .65rem; flex-wrap: wrap; }
+.modal-head small { color: var(--muted); font-size: .86rem; font-weight: 400; }
+
+.desk-grid {
+  display: grid; grid-template-columns: 1.08fr .92fr; gap: 1.5rem;
+  padding: 1.5rem 1.75rem 1.85rem;
+}
+.desk-form { display: flex; flex-direction: column; gap: .95rem; }
+.field { display: flex; flex-direction: column; gap: .38rem; }
+.field > span { font-weight: 600; font-size: .92rem; }
+.field > span em { color: var(--muted); font-style: normal; font-weight: 400; font-size: .82rem; }
+.field input[type="text"], .field input[type="search"], .field textarea, .field select {
+  border: 1.5px solid var(--line); border-radius: 12px; padding: .62rem .95rem;
+  outline: 0; background: #fff; transition: border-color .15s, box-shadow .15s; resize: vertical;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--brand); box-shadow: 0 0 0 4px rgba(225,29,46,.12);
+}
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+.tags-input-row { display: flex; gap: .55rem; }
+.tags-input-row input { flex: 1; }
+.row-check { display: flex; flex-direction: column; gap: .55rem; }
+.check {
+  display: flex; align-items: center; gap: .55rem; font-size: .93rem;
+  background: var(--bg); border: 1.5px solid var(--line); border-radius: 12px; padding: .62rem .95rem;
+  cursor: pointer;
+}
+.check input { width: 17px; height: 17px; accent-color: var(--brand); }
+.form-actions { display: flex; gap: .65rem; flex-wrap: wrap; }
+
+.desk-side { display: flex; flex-direction: column; gap: 1.15rem; min-width: 0; }
+.preview-box, .manage-box {
+  background: var(--bg); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.15rem;
+}
+.preview-box h3, .manage-box h3 { font-size: 1.02rem; margin-bottom: .85rem; display: flex; align-items: center; gap: .5rem; }
+.preview-card .card { box-shadow: 0 6px 18px rgba(15,23,42,.1); }
+.preview-card .card:hover { transform: none; }
+
+.copy-mode { display: flex; flex-direction: column; gap: .5rem; margin: .35rem 0 .85rem; }
+.copy-mode label {
+  display: flex; align-items: center; gap: .55rem; font-size: .9rem;
+  background: #fff; border: 1.5px solid var(--line); border-radius: 11px; padding: .55rem .85rem;
+  cursor: pointer;
+}
+.copy-mode input { accent-color: var(--brand); }
+
+.manage-box { max-height: 560px; overflow: auto; }
+.desk-item {
+  display: flex; align-items: center; gap: .85rem; background: #fff;
+  border: 1.5px solid var(--line); border-radius: 13px; padding: .65rem .8rem; margin-bottom: .65rem;
+}
+.desk-item img { width: 62px; height: 46px; object-fit: cover; border-radius: 9px; flex: 0 0 auto; background: var(--line); }
+.desk-item-info { flex: 1; min-width: 0; }
+.desk-item-info strong { display: block; font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.desk-item-info span { color: var(--muted); font-size: .78rem; }
+.desk-item-actions { display: flex; gap: .32rem; }
+.desk-item-actions .icon-btn { width: 34px; height: 34px; font-size: .92rem; }
+.empty-mini { color: var(--muted); font-size: .9rem; text-align: center; padding: 1.25rem 0; }
+
+/* ---------- Toast ---------- */
+.toast-wrap {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: .6rem; z-index: 200; pointer-events: none;
+}
+.toast {
+  background: var(--navy); color: #fff; padding: .78rem 1.55rem; border-radius: 999px;
+  font-weight: 600; font-size: .93rem; box-shadow: var(--shadow-lg);
+  opacity: 0; transform: translateY(14px); transition: all .32s ease;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.toast.show { opacity: 1; transform: none; }
+
+/* ---------- สถานะว่าง ---------- */
+.empty { text-align: center; padding: 3.2rem 1rem; color: var(--muted); }
+.empty-icon { font-size: 2.6rem; margin-bottom: .65rem; }
+.empty h3 { color: var(--ink); margin-bottom: .35rem; }
+
+.no-scroll { overflow: hidden; }
+
+/* ---------- ข่าวสดจริง (LIVE) ---------- */
+.live-badge {
+  display: inline-flex; align-items: center; gap: .45rem; background: var(--brand);
+  color: #fff; font-size: .72rem; font-weight: 700; padding: .22rem .75rem;
+  border-radius: 999px; letter-spacing: 1.2px; vertical-align: middle;
+}
+.live-badge .pulse { background: #fff; width: 7px; height: 7px; }
+.loading {
+  grid-column: 1 / -1; text-align: center; padding: 2.6rem 1rem;
+  color: var(--muted); font-size: 1.02rem; background: var(--card);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.section-divider {
+  margin: 2.6rem 0 1.15rem; padding-top: 1.8rem; border-top: 2px dashed var(--line);
+}
+.section-divider h2 { font-size: 1.35rem; font-weight: 700; display: flex; align-items: baseline; gap: .55rem; }
+.live-card .card-actions .btn { padding: .42rem .78rem; }
+
+/* ---------- มุมมองข่าวสั้น (เฉพาะหัวข้อ + สรุป) ---------- */
+.view-toggle { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+.short-mode { display: flex; flex-direction: column; gap: .85rem; }
+.short-item {
+  display: flex; justify-content: space-between; gap: 1.15rem; align-items: flex-start;
+  background: var(--card); border-radius: 15px; padding: 1.15rem 1.35rem;
+  box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease;
+  animation: rise .35s ease both;
+}
+.short-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.short-body { min-width: 0; }
+.short-title { font-size: 1.13rem; font-weight: 700; margin: .38rem 0 .32rem; }
+.short-excerpt { color: #475569; font-size: .95rem; }
+.short-actions { display: flex; flex-direction: column; gap: .45rem; flex: 0 0 auto; }
+.chip.cat.mini { font-size: .72rem; padding: .18rem .65rem; vertical-align: middle; }
+.hot { color: var(--brand); font-weight: 700; }
+@media (max-width: 720px) {
+  .short-item { flex-direction: column; }
+  .short-actions { flex-direction: row; flex-wrap: wrap; width: 100%; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1160px) {
+  .main-nav { display: none; }
+  .main-nav.open {
+    display: flex; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--navy2); padding: .85rem 4vw; flex-direction: column;
+    box-shadow: 0 20px 40px rgba(2,6,23,.4); border-radius: 0 0 18px 18px;
+  }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+  .sidebar .panel { flex: 1 1 300px; }
+  .desk-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .header-inner { flex-wrap: wrap; }
+  .header-actions { width: 100%; order: 3; flex-wrap: wrap; }
+  .search-box { flex: 1; }
+  .search-box input { width: 100%; }
+  .header-actions .btn { flex: 1; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero-card { min-height: 380px; }
+}
+
+@media (max-width: 560px) {
+  .topline-right { display: none; }
+  .brand-text strong { font-size: 1.3rem; }
+  .grid { grid-template-columns: 1fr; }
+  .row2 { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .breaking-label { font-size: .78rem; padding: .3rem .75rem; }
+  .card-actions .btn { flex: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .ticker-track { animation: none; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ======= แถบเวลาด้านบน ======= -->
+<div class="topline">
+  <div class="wrap topline-inner">
+    <span id="clock" class="clock">--</span>
+    <span class="topline-right"><span class="live-dot"></span> ถ่ายทอดสด · อัปเดตต่อเนื่อง 24 ชม.</span>
+  </div>
+</div>
+
+<!-- ======= หัวเว็บ ======= -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#" id="brandHome">
+      <span class="brand-mark">
+        <svg viewBox="0 0 48 48" class="logo-svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff3b4e"/><stop offset="1" stop-color="#ff8a00"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lg1)"/>
+          <path d="M13 35V13h21v6H20v4h11v6H20v6z" fill="#fff"/>
+          <circle cx="35.5" cy="33.5" r="2.8" fill="#fff"/>
+          <path d="M31.5 27.5a7 7 0 0 1 0 12" stroke="#fff" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+          <path d="M35.5 24a11.5 11.5 0 0 1 0 19" stroke="#fff" stroke-width="2.3" fill="none" stroke-linecap="round" opacity=".55"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>Fam <em>Ai</em></strong>
+        <small>สำนักข่าวสด · LIVE NEWS</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#news" class="active" data-nav="ทั้งหมด">หน้าแรก</a>
+      <a href="#news" data-nav="การเมือง">การเมือง</a>
+      <a href="#news" data-nav="เศรษฐกิจ">เศรษฐกิจ</a>
+      <a href="#news" data-nav="สังคม">สังคม</a>
+      <a href="#news" data-nav="บันเทิง">บันเทิง</a>
+      <a href="#news" data-nav="กีฬา">กีฬา</a>
+      <a href="#news" data-nav="ไอที">ไอที</a>
+      <a href="#news" data-nav="สภาพอากาศ">สภาพอากาศ</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="search-box">
+        <input id="searchInput" type="search" placeholder="ค้นหาข่าว แท็ก หรือคีย์เวิร์ด..." autocomplete="off">
+        <button class="search-btn" id="searchBtn" aria-label="ค้นหา">ค้นหา</button>
+      </div>
+      <button class="btn btn-ghost" id="btnCopyAll" title="คัดลอกข่าวสั้นทั้งหมด เฉพาะหัวข้อ+สรุป">📋 คัดลอกข่าวสั้นทั้งหมด</button>
+      <button class="btn btn-brand" id="btnOpenDesk">✂️ ระบบตัดกอง</button>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="เมนู">☰</button>
+  </div>
+</header>
+
+<!-- ======= แถบข่าวด่วนวิ่ง ======= -->
+<div class="breaking-bar">
+  <div class="wrap breaking-inner">
+    <span class="breaking-label"><span class="pulse"></span> ด่วนมาก</span>
+    <div class="ticker" id="ticker">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= ข่าวเด่น Hero ======= -->
+<section class="hero wrap" id="hero"></section>
+
+<!-- ======= เนื้อหาหลัก ======= -->
+<main class="wrap layout" id="news">
+  <section class="content">
+    <div class="section-head">
+      <h2>ข่าวสดออนไลน์ <span class="live-badge"><span class="pulse"></span> LIVE</span> <span class="count" id="liveCount"></span></h2>
+      <div class="view-toggle">
+        <button class="btn small btn-brand" id="btnRefreshLive">🔄 รีเฟรชข่าวสด</button>
+      </div>
+    </div>
+    <div class="chip-row" id="sourceChips"></div>
+    <div class="grid" id="liveGrid">
+      <div class="loading">📡 กำลังโหลดข่าวสดจากสำนักข่าว...</div>
+    </div>
+
+    <div class="section-divider">
+      <h2>ข่าวในกองบรรณาธิการของคุณ <span class="count" id="newsCount"></span></h2>
+    </div>
+    <div class="section-head">
+      <div class="view-toggle">
+        <button class="chip active" data-view="full">📰 การ์ดข่าวเต็ม</button>
+        <button class="chip" data-view="short">⚡ ข่าวสั้น (เฉพาะหัวข้อ+สรุป)</button>
+        <button class="btn small" id="btnCopyShortAll" title="คัดลอกข่าวสั้นทั้งหมด เฉพาะหัวข้อ+สรุป">📋 คัดลอกข่าวสั้นทั้งหมด</button>
+      </div>
+      <div class="chip-row" id="chipRow"></div>
+    </div>
+    <div class="grid" id="newsGrid"></div>
+    <div class="empty" id="emptyState" hidden>
+      <div class="empty-icon">🔍</div>
+      <h3>ไม่พบข่าวที่ค้นหา</h3>
+      <p>ลองเปลี่ยนคำค้นหา หรือเลือกหมวดหมู่อื่นดูนะครับ</p>
+    </div>
+  </section>
+
+  <aside class="sidebar">
+    <section class="panel">
+      <h3 class="panel-title"><span class="panel-icon red">🔴</span> ข่าวด่วน</h3>
+      <ol class="breaking-list" id="breakingList"></ol>
+    </section>
+
+    <section class="panel">
+      <h3 class="panel-title"><span class="panel-icon">#️⃣</span> แท็กยอดนิยม <small>แตะเพื่อคัดลอก</small></h3>
+      <div class="tag-cloud" id="tagCloud"></div>
+    </section>
+
+    <section class="panel">
+      <h3 class="panel-title"><span class="panel-icon">📊</span> สถิติ Fam Ai</h3>
+      <div class="stat-grid" id="statGrid"></div>
+    </section>
+
+    <section class="panel panel-about">
+      <h3 class="panel-title"><span class="panel-icon">ℹ️</span> เกี่ยวกับเรา</h3>
+      <p><strong>Fam Ai ข่าวสด</strong> สำนักข่าวออนไลน์ที่มาพร้อมระบบ
+      <strong>ตัดกอง</strong> (กองบรรณาธิการ) และปุ่ม
+      <strong>คัดลอกข่าว 1 คลิก</strong> — ได้ทั้งเนื้อหาและแฮชแท็ก
+      พร้อมใช้โพสต์ต่อทันที</p>
+      <button class="btn btn-brand btn-block" id="btnOpenDesk2">✂️ เปิดระบบตัดกอง</button>
+    </section>
+  </aside>
+</main>
+
+<!-- ======= แฮชแท็กแบนด์ ======= -->
+<section class="tag-band">
+  <div class="wrap">
+    <h2>แฮชแท็กยอดนิยม 20 อัน <small>แตะเพื่อคัดลอกทันที</small></h2>
+    <div class="tag-band-list" id="tagBand"></div>
+    <button class="btn btn-light" id="btnCopyAllTags">📋 คัดลอกแฮชแท็กทั้งหมด</button>
+  </div>
+</section>
+
+<!-- ======= ท้ายเว็บ ======= -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="brand footer-brand">
+        <span class="brand-mark small">
+          <svg viewBox="0 0 48 48" class="logo-svg" aria-hidden="true">
+            <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lg1)"/>
+            <path d="M13 35V13h21v6H20v4h11v6H20v6z" fill="#fff"/>
+          </svg>
+        </span>
+        <span class="brand-text"><strong>Fam <em>Ai</em></strong><small>ข่าวสด ทันทุกสถานการณ์</small></span>
+      </div>
+      <p class="footer-desc">สำนักข่าวสดออนไลน์ รวมข่าวด่วน ประเด็นร้อน และเรื่องราวน่าสนใจ
+      พร้อมระบบตัดกองและคัดลอกข่าวที่ง่ายที่สุด</p>
+    </div>
+    <div>
+      <h4>หมวดหมู่ข่าว</h4>
+      <ul class="footer-links">
+        <li><a href="#news" data-nav="การเมือง">การเมือง</a></li>
+        <li><a href="#news" data-nav="เศรษฐกิจ">เศรษฐกิจ</a></li>
+        <li><a href="#news" data-nav="สังคม">สังคม</a></li>
+        <li><a href="#news" data-nav="บันเทิง">บันเทิง</a></li>
+        <li><a href="#news" data-nav="กีฬา">กีฬา</a></li>
+        <li><a href="#news" data-nav="ไอที">ไอที</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>ฟีเจอร์เด่น</h4>
+      <ul class="footer-links">
+        <li>✂️ ระบบตัดกอง (News Desk)</li>
+        <li>📋 คัดลอกข่าว 1 คลิก</li>
+        <li>#️⃣ แฮชแท็กอัตโนมัติ 10–20 แท็ก</li>
+        <li>🖼️ ภาพประกอบทุกข่าว</li>
+        <li>📌 ปักหมุดข่าวเด่น-ข่าวด่วน</li>
+      </ul>
+    </div>
+    <div>
+      <h4>ติดต่อ</h4>
+      <ul class="footer-links">
+        <li>✉️ news@famai.example</li>
+        <li>☎️ 02-000-0000</li>
+        <li>📍 Pran Buri, Prachuap Khiri Khan</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    © 2026 Fam Ai ข่าวสด · เว็บไซต์ตัวอย่างเพื่อการสาธิตระบบ · ข้อมูลข่าวในเว็บเป็นเรื่องสมมติ
+  </div>
+</footer>
+
+<!-- ======= โมดัลอ่านข่าว ======= -->
+<div class="modal" id="readModal" hidden>
+  <div class="modal-card reader-card">
+    <button class="icon-btn modal-close" data-close="readModal" aria-label="ปิด">✕</button>
+    <div id="readerContent"></div>
+  </div>
+</div>
+
+<!-- ======= โมดัลระบบตัดกอง ======= -->
+<div class="modal" id="deskModal" hidden>
+  <div class="modal-card desk-card">
+    <header class="modal-head">
+      <h2>✂️ ระบบตัดกอง <small>กองบรรณาธิการ Fam Ai — เพิ่ม / ตัด / แก้ไข / คัดลอกข่าว</small></h2>
+      <button class="icon-btn modal-close" data-close="deskModal" aria-label="ปิด">✕</button>
+    </header>
+
+    <div class="desk-grid">
+      <!-- ฟอร์มตัดข่าว -->
+      <form id="deskForm" class="desk-form">
+        <input type="hidden" id="dId">
+        <label class="field">
+          <span>พาดหัวข่าว *</span>
+          <input id="dTitle" type="text" required placeholder="กรอกพาดหัวข่าว...">
+        </label>
+        <label class="field">
+          <span>คำโปรย (ย่อหน้าแรก)</span>
+          <textarea id="dExcerpt" rows="2" placeholder="สรุปข่าวสั้น ๆ 1-2 ประโยค..."></textarea>
+        </label>
+        <label class="field">
+          <span>เนื้อหาข่าว *</span>
+          <textarea id="dBody" rows="8" required placeholder="เนื้อหาข่าว (เว้นบรรทัดว่างเพื่อขึ้นย่อหน้าใหม่)..."></textarea>
+        </label>
+        <div class="row2">
+          <label class="field">
+            <span>หมวดหมู่</span>
+            <select id="dCat">
+              <option>การเมือง</option>
+              <option>เศรษฐกิจ</option>
+              <option selected>สังคม</option>
+              <option>บันเทิง</option>
+              <option>กีฬา</option>
+              <option>ไอที</option>
+              <option>สภาพอากาศ</option>
+              <option>อาชญากรรม</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>ผู้สื่อข่าว / ที่มา</span>
+            <input id="dSource" type="text" value="Fam Ai ข่าวสด">
+          </label>
+        </div>
+        <label class="field">
+          <span>แฮชแท็ก <em>(คั่นด้วยวรรค หรือ , )</em></span>
+          <div class="tags-input-row">
+            <input id="dTags" type="text" placeholder="#ข่าวด่วน #FamAi #ข่าววันนี้ ...">
+            <button class="btn" type="button" id="btnSuggestTags">✨ แท็กแนะนำ</button>
+          </div>
+        </label>
+        <label class="field">
+          <span>รูปภาพประกอบข่าว</span>
+          <div class="row2">
+            <input id="dImage" type="text" placeholder="วางลิงก์ภาพ หรือเลือกไฟล์ด้านขวา">
+            <input id="dFile" type="file" accept="image/*">
+          </div>
+        </label>
+        <div class="row-check">
+          <label class="check"><input type="checkbox" id="dBreaking"> 🔴 ปักเป็น <strong>ข่าวด่วน</strong> (วิ่งบนแถบด่วนมาก)</label>
+          <label class="check"><input type="checkbox" id="dPinned"> 📌 ปักหมุดขึ้น <strong>ข่าวเด่น</strong> (Hero)</label>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-brand" type="submit">💾 บันทึกลงกองบรรณาธิการ</button>
+          <button class="btn" type="button" id="btnResetForm">ล้างฟอร์ม</button>
+        </div>
+      </form>
+
+      <!-- ตัวอย่าง + คัดลอก + จัดการ -->
+      <div class="desk-side">
+        <div class="preview-box">
+          <h3>👀 ตัวอย่างการ์ดข่าว</h3>
+          <div id="deskPreview" class="preview-card"></div>
+          <h3>📋 คัดลอกข่าว</h3>
+          <div class="copy-mode" id="copyModeBox">
+            <label><input type="radio" name="copyMode" value="headline"> 1️⃣ เฉพาะหัวข้อ</label>
+            <label><input type="radio" name="copyMode" value="short" checked> 2️⃣ ข่าวสั้น — เฉพาะหัวข้อ + ข่าวสั้นที่สรุปมา</label>
+            <label><input type="radio" name="copyMode" value="full"> 3️⃣ เนื้อหาเต็ม — ไม่รวมแฮชแท็ก</label>
+            <label><input type="radio" name="copyMode" value="tags-lines"> 4️⃣ แฮชแท็กอย่างเดียว — แยกบรรทัดละแท็ก</label>
+            <label><input type="radio" name="copyMode" value="tags-spaces"> 5️⃣ แฮชแท็กอย่างเดียว — คั่นด้วยวรรค</label>
+            <label><input type="radio" name="copyMode" value="all"> 6️⃣ ครบทั้งหมด (หัวข้อ + เนื้อหา + แท็ก + ที่มา)</label>
+          </div>
+          <button class="btn btn-brand btn-block" id="btnDeskCopy" type="button">📋 คัดลอกตามรูปแบบที่เลือก</button>
+        </div>
+
+        <div class="manage-box">
+          <h3>🗂️ ข่าวในกอง <span class="count" id="deskCount"></span></h3>
+          <div id="deskList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+window.FAMAI_GLOBAL_TAGS = [
+  "#ข่าวสด", "#FamAi", "#ข่าวด่วนวันนี้", "#BreakingNews", "#เกาะติดสถานการณ์",
+  "#ทันทุกข่าว", "#ข่าวออนไลน์", "#ประเด็นร้อน", "#สังคมไทย", "#ข่าวเศรษฐกิจ",
+  "#ข่าวการเมือง", "#ข่าวบันเทิง", "#ข่าวกีฬา", "#ข่าวไอที", "#ไวรัลไทย",
+  "#สำนักข่าวFamAi", "#อัปเดตล่าสุด", "#ข่าวไทย", "#ไม่พลาดทุกข่าว", "#ข่าววันนี้"
+];
+/* ============ Fam Ai ข่าวสด — app.js ============ */
+(function () {
+  'use strict';
+
+  /* ---------- ค่าคงที่ ---------- */
+  var STORAGE_KEY = 'famai_news_v2';
+  var COPY_KEY = 'famai_copy_count_v1';
+
+  var CAT_ORDER = ['ทั้งหมด', 'การเมือง', 'เศรษฐกิจ', 'สังคม', 'บันเทิง', 'กีฬา', 'ไอที', 'สภาพอากาศ', 'อาชญากรรม'];
+  var CAT_COLORS = {
+    'การเมือง': '#6d28d9',
+    'เศรษฐกิจ': '#0369a1',
+    'สังคม': '#ea580c',
+    'บันเทิง': '#c026d3',
+    'กีฬา': '#15803d',
+    'ไอที': '#0f766e',
+    'สภาพอากาศ': '#0284c7',
+    'อาชญากรรม': '#b91c1c'
+  };
+  var CAT_TAG_POOL = {
+    'การเมือง': ['#ข่าวการเมือง', '#รัฐสภา', '#นโยบายรัฐ', '#รัฐบาล', '#การเมืองไทย', '#เลือกตั้ง'],
+    'เศรษฐกิจ': ['#ข่าวเศรษฐกิจ', '#หุ้นไทย', '#ดอกเบี้ย', '#ค่าเงินบาท', '#เศรษฐกิจไทย', '#การลงทุน'],
+    'สังคม': ['#ข่าวสังคม', '#สังคมไทย', '#เรื่องเด่นวันนี้', '#ไวรัล', '#เรื่องราวดีๆ', '#เตือนภัย'],
+    'บันเทิง': ['#ข่าวบันเทิง', '#ศิลปินไทย', '#คอนเสิร์ต', '#ละครไทย', '#วงการบันเทิง', '#ศิลปิน'],
+    'กีฬา': ['#ข่าวกีฬา', '#ฟุตบอล', '#ทีมชาติไทย', '#ไทยลีก', '#กีฬาวันนี้', '#ฟุตบอลไทย'],
+    'ไอที': ['#ข่าวไอที', '#AI', '#นวัตกรรม', '#เทคโนโลยี', '#ดิจิทัล', '#สตาร์ทอัพ'],
+    'สภาพอากาศ': ['#สภาพอากาศ', '#พยากรณ์อากาศ', '#เตือนภัย', '#ฝนตกหนัก', '#น้ำท่วม', '#กรมอุตุนิยมวิทยา'],
+    'อาชญากรรม': ['#ข่าวอาชญากรรม', '#ตำรวจ', '#อุบัติเหตุ', '#ความปลอดภัย', '#คดีเด่น', '#อำนวยความยุติธรรม']
+  };
+  var BASE_TAGS = ['#ข่าวสด', '#FamAi', '#ข่าววันนี้', '#BreakingNews', '#เกาะติดสถานการณ์',
+    '#ทันทุกข่าว', '#ข่าวออนไลน์', '#ประเด็นร้อน', '#อัปเดตล่าสุด', '#สำนักข่าวFamAi'];
+
+  /* ---------- สถานะ ---------- */
+  var state = {
+    news: [],
+    live: [],
+    source: 'ทั้งหมด',
+    liveError: null,
+    filter: 'ทั้งหมด',
+    query: '',
+    view: 'full',
+    editingId: null,
+    copyCount: 0
+  };
+
+  /* ---------- Storage ปลอดภัย ---------- */
+  function safeGet(key, fallback) {
+    try {
+      var v = localStorage.getItem(key);
+      return v ? JSON.parse(v) : fallback;
+    } catch (e) { return fallback; }
+  }
+  function safeSet(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (e) { return false; }
+  }
+
+  /* ---------- ยูทิลิตี้ ---------- */
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function fmtDate(iso) {
+    try {
+      return new Intl.DateTimeFormat('th-TH', {
+        day: 'numeric', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Bangkok'
+      }).format(new Date(iso)).replace(',', '') + ' น.';
+    } catch (e) {
+      return String(iso || '').replace('T', ' ').slice(0, 16);
+    }
+  }
+
+  function relTime(iso) {
+    var diff = Date.now() - new Date(iso).getTime();
+    if (isNaN(diff)) return '';
+    var m = Math.floor(diff / 60000);
+    if (m < 1) return 'เมื่อสักครู่';
+    if (m < 60) return m + ' นาทีที่แล้ว';
+    var h = Math.floor(m / 60);
+    if (h < 24) return h + ' ชม.ที่แล้ว';
+    return Math.floor(h / 24) + ' วันที่แล้ว';
+  }
+
+  function uid() {
+    return 'n-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 7);
+  }
+
+  function catColor(cat) { return CAT_COLORS[cat] || '#e11d2e'; }
+
+  function placeholderImg(cat) {
+    var c = catColor(cat);
+    var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'>" +
+      "<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>" +
+      "<stop offset='0' stop-color='" + c + "'/><stop offset='1' stop-color='#0f172a'/>" +
+      "</linearGradient></defs>" +
+      "<rect width='800' height='500' fill='url(#g)'/>" +
+      "<circle cx='640' cy='120' r='150' fill='#ffffff' opacity='0.08'/>" +
+      "<circle cx='140' cy='400' r='190' fill='#ffffff' opacity='0.07'/>" +
+      "<text x='400' y='265' font-family='Arial' font-size='72' font-weight='bold' fill='#ffffff' text-anchor='middle' opacity='0.9'>Fam Ai</text>" +
+      "<text x='400' y='325' font-family='Arial' font-size='30' fill='#ffffff' text-anchor='middle' opacity='0.7'>ข่าวสด</text>" +
+      "</svg>";
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  }
+
+  function showToast(msg) {
+    var wrap = document.getElementById('toastWrap');
+    if (!wrap) return;
+    var t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    wrap.appendChild(t);
+    requestAnimationFrame(function () { t.classList.add('show'); });
+    setTimeout(function () {
+      t.classList.remove('show');
+      setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 350);
+    }, 2200);
+  }
+
+  function bumpCopy() {
+    state.copyCount += 1;
+    safeSet(COPY_KEY, state.copyCount);
+    updateStats();
+  }
+
+  function copyText(text, label) {
+    var done = function () {
+      bumpCopy();
+      showToast((label || 'ข้อความ') + ' ถูกคัดลอกแล้ว ✓');
+    };
+    var fallback = function () {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) done();
+        else showToast('คัดลอกไม่สำเร็จ กรุณาลองใหม่');
+      } catch (e) {
+        showToast('คัดลอกไม่สำเร็จ กรุณาลองใหม่');
+      }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+  }
+
+  /* ---------- ข้อมูล ---------- */
+  function loadNews() {
+    var saved = safeGet(STORAGE_KEY, null);
+    if (Array.isArray(saved)) return saved;
+    return [];
+  }
+  function saveNews() {
+    var ok = safeSet(STORAGE_KEY, state.news);
+    if (!ok) showToast('พื้นที่บันทึกในเครื่องเต็ม — ลองใช้ภาพขนาดเล็กลง');
+    return ok;
+  }
+
+  /* ---------- แฮชแท็ก ---------- */
+  function normalizeTags(str) {
+    return String(str || '').split(/[\s,]+/).map(function (t) {
+      t = t.trim();
+      if (!t) return null;
+      return t.charAt(0) === '#' ? t : '#' + t;
+    }).filter(Boolean);
+  }
+  function suggestTags(cat) {
+    var pool = CAT_TAG_POOL[cat] || ['#ข่าวเด่น', '#เรื่องราวดีๆ', '#ข่าวไทย', '#สังคมไทย', '#อ่านข่าว', '#ต้องรู้'];
+    return BASE_TAGS.concat(pool.slice(0, 6)).slice(0, 16);
+  }
+
+  /* ---------- รูปแบบการคัดลอก (แยกส่วนชัดเจน ไม่ปนกัน) ---------- */
+  function footerNote(n) {
+    return '————————————\nที่มา : ' + (n.source || 'Fam Ai ข่าวสด') + ' · ' + fmtDate(n.time);
+  }
+  /* 1) เฉพาะหัวข้อ */
+  function copyHeadline(n) {
+    copyText(n.title, 'หัวข้อข่าว');
+  }
+  /* 2) ข่าวสั้น = เฉพาะหัวข้อ + ข่าวสั้นที่สรุปมา */
+  function copyShort(n) {
+    copyText(n.title + '\n\n' + (n.excerpt || ''), 'ข่าวสั้น (หัวข้อ+สรุป)');
+  }
+  /* 3) เนื้อหาเต็ม (ไม่ปนแฮชแท็ก) */
+  function copyFull(n) {
+    copyText(n.title + '\n\n' + (n.body || n.excerpt || '') + '\n\n' + footerNote(n), 'เนื้อหาเต็ม');
+  }
+  /* 4) แฮชแท็กอย่างเดียว แยกกัน — แยกบรรทัดละแท็ก (หรือคั่นวรรค) */
+  function copyTagsOf(n, sep) {
+    copyText((n.tags || []).join(sep || '\n'), 'แฮชแท็ก (แยกกัน)');
+  }
+  /* ทางเลือกเสริม: ครบทั้งหมดในชุดเดียว */
+  function copyEverything(n) {
+    copyText(n.title + '\n\n' + (n.body || n.excerpt || '') + '\n\n' +
+      (n.tags || []).join(' ') + '\n' + footerNote(n), 'ข่าวพร้อมแฮชแท็ก');
+  }
+
+  /* ---------- ข่าวสดจริง: /api/news (server.py) หรือ proxy (GitHub Pages) ---------- */
+  var LIVE_FEEDS = [
+    { name: 'ข่าวสด', key: 'khaosod', url: 'https://www.khaosod.co.th/feed', color: '#e11d2e' },
+    { name: 'มติชน', key: 'matichon', url: 'https://www.matichon.co.th/feed', color: '#0369a1' },
+    { name: 'ประชาชาติธุรกิจ', key: 'prachachat', url: 'https://www.prachachat.net/feed', color: '#0f766e' },
+    { name: 'ข่าวหุ้นธุรกิจ', key: 'kaohoon', url: 'https://www.kaohoon.com/feed', color: '#ea580c' }
+  ];
+
+  function stripTags(s) {
+    return String(s || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+      .replace(/\s+/g, ' ').trim();
+  }
+  function imgFromHtml(s) {
+    var m = String(s || '').match(/<img[^>]+src=["']([^"']+)["']/i);
+    return m ? m[1] : null;
+  }
+  function liveTags(source, category) {
+    var tags = (window.FAMAI_GLOBAL_TAGS || []).slice(0, 10);
+    tags.push('#' + String(source).replace(/\s+/g, ''));
+    var c = String(category || '').replace(/\s+/g, '');
+    if (c && c.length <= 18 && c !== 'ข่าว') tags.push('#' + c);
+    return tags.slice(0, 12);
+  }
+  function hashId(s) {
+    var h = 5381;
+    for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+    return 'live-' + h.toString(36);
+  }
+  function makeLiveItem(feed, o) {
+    return {
+      id: hashId(o.link || o.title || String(Math.random())),
+      title: stripTags(o.title) || '(ไม่มีหัวข้อ)',
+      link: o.link || '#',
+      excerpt: stripTags(o.excerpt || o.body || '').slice(0, 220),
+      body: stripTags(o.body || o.excerpt || '').slice(0, 700),
+      category: o.category || 'ข่าว',
+      source: feed.name,
+      sourceColor: feed.color,
+      image: o.image || imgFromHtml(o.body || o.excerpt) || null,
+      time: o.time || new Date().toISOString(),
+      breaking: false,
+      pinned: false,
+      tags: liveTags(feed.name, o.category)
+    };
+  }
+  function fetchViaRss2Json(feed) {
+    var api = 'https://api.rss2json.com/v1/api.json?count=20&rss_url=' + encodeURIComponent(feed.url);
+    return fetch(api).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d || d.status !== 'ok' || !d.items) throw new Error('rss2json');
+      return d.items.map(function (it) {
+        var t = it.pubDate ? new Date(String(it.pubDate).replace(' ', 'T') + 'Z') : new Date();
+        return makeLiveItem(feed, {
+          title: it.title, link: it.link,
+          excerpt: it.description, body: it.content || it.description,
+          image: it.thumbnail || imgFromHtml((it.description || '') + ' ' + (it.content || '')),
+          category: (it.categories && it.categories[0]) || 'ข่าว',
+          time: isNaN(t.getTime()) ? new Date().toISOString() : t.toISOString()
+        });
+      });
+    });
+  }
+  function fetchViaXmlProxy(feed, proxyBase) {
+    return fetch(proxyBase + encodeURIComponent(feed.url)).then(function (r) {
+      return r.text();
+    }).then(function (txt) {
+      if (txt && txt.charAt(0) === '{') {
+        var j = JSON.parse(txt);
+        txt = j.contents || '';
+      }
+      if (!txt || txt.indexOf('<item') === -1) throw new Error('proxy');
+      var doc = new DOMParser().parseFromString(txt, 'text/xml');
+      var nodes = doc.getElementsByTagName('item');
+      var out = [];
+      for (var i = 0; i < nodes.length && i < 20; i++) {
+        var it = nodes[i];
+        var gt = function (tag) {
+          var n = it.getElementsByTagName(tag);
+          return n.length ? String(n[0].textContent || '').trim() : '';
+        };
+        var desc = gt('description');
+        var content = '';
+        var cn = it.getElementsByTagName('content:encoded');
+        if (cn.length) content = cn[0].textContent || '';
+        var thumb = '';
+        var th = it.getElementsByTagName('media:thumbnail');
+        if (th.length && th[0].getAttribute('url')) thumb = th[0].getAttribute('url');
+        if (!thumb) {
+          var mc = it.getElementsByTagName('media:content');
+          if (mc.length && mc[0].getAttribute('url')) thumb = mc[0].getAttribute('url');
+        }
+        var pub = gt('pubDate') || gt('dc:date');
+        var t = new Date(pub);
+        out.push(makeLiveItem(feed, {
+          title: gt('title'), link: gt('link'),
+          excerpt: desc, body: content || desc,
+          image: thumb || imgFromHtml(content || desc),
+          category: gt('category') || 'ข่าว',
+          time: isNaN(t.getTime()) ? new Date().toISOString() : t.toISOString()
+        }));
+      }
+      return out;
+    });
+  }
+  function fetchFeedSmart(feed) {
+    return fetchViaRss2Json(feed).catch(function () {
+      return fetchViaXmlProxy(feed, 'https://api.allorigins.win/get?url=');
+    }).catch(function () {
+      return fetchViaXmlProxy(feed, 'https://api.codetabs.com/v1/proxy?quest=');
+    });
+  }
+  function applyLive(items, silent) {
+    state.live = items.map(function (x) { x.isLive = true; return x; });
+    state.liveError = null;
+    renderAll();
+    if (!silent) showToast('อัปเดตข่าวสดแล้ว ' + state.live.length + ' ข่าว');
+  }
+  function loadLive(silent) {
+    var g = document.getElementById('liveGrid');
+    if (!silent && g && !state.live.length) {
+      g.innerHTML = '<div class="loading">📡 กำลังโหลดข่าวสดจากสำนักข่าว...</div>';
+    }
+    fetch('/api/news', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('no api'); return r.json(); })
+      .then(function (d) {
+        if (!d || !d.ok || !d.items) throw new Error('bad');
+        applyLive(d.items, silent);
+      })
+      .catch(function () {
+        Promise.all(LIVE_FEEDS.map(function (f) {
+          return fetchFeedSmart(f).catch(function () { return []; });
+        })).then(function (lists) {
+          var items = [];
+          lists.forEach(function (arr) { items = items.concat(arr || []); });
+          items.sort(function (a, b) { return String(b.time || '').localeCompare(String(a.time || '')); });
+          if (items.length) {
+            applyLive(items.slice(0, 80), silent);
+          } else {
+            state.liveError = 'โหลดข่าวสดไม่สำเร็จ — ตรวจสอบอินเทอร์เน็ต หรือรันผ่าน server.py';
+            renderLive();
+          }
+        });
+      });
+  }
+  function liveVisible() {
+    var q = state.query.trim().toLowerCase();
+    return state.live.filter(function (n) {
+      if (state.source !== 'ทั้งหมด' && n.source !== state.source) return false;
+      if (!q) return true;
+      var hay = (n.title + ' ' + (n.excerpt || '') + ' ' + (n.tags || []).join(' ')).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+  }
+
+  function liveCardHTML(n) {
+    var img = n.image || placeholderImg('สังคม');
+    return '<article class="card live-card">' +
+      '<div class="card-media">' +
+        '<img src="' + esc(img) + '" alt="' + esc(n.title) + '" loading="lazy">' +
+        '<span class="chip cat" style="--c:' + esc(n.sourceColor || '#e11d2e') + '">' + esc(n.source) + '</span>' +
+        '<span class="badge-live"><span class="pulse"></span> LIVE</span>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="meta">' + fmtDate(n.time) + ' · ' + relTime(n.time) + ' · ' + esc(n.category) + '</div>' +
+        '<h3 class="card-title">' + esc(n.title) + '</h3>' +
+        '<p class="excerpt">' + esc(n.excerpt || '') + '</p>' +
+        '<div class="tags">' + tagsHTML(n.tags, 5) + '</div>' +
+        '<div class="card-actions">' +
+          '<button class="btn btn-primary" data-action="copy-short" data-id="' + esc(n.id) + '">📋 คัดลอกข่าวสั้น</button>' +
+          '<button class="btn" data-action="copy-headline" data-id="' + esc(n.id) + '" title="คัดลอกเฉพาะหัวข้อ">หัวข้อ</button>' +
+          '<button class="btn" data-action="copy-tags" data-id="' + esc(n.id) + '" title="คัดลอกแฮชแท็ก แยกบรรทัดละแท็ก"># แท็ก</button>' +
+          '<button class="btn" data-action="open" data-id="' + esc(n.id) + '">อ่าน</button>' +
+          '<a class="btn" href="' + esc(n.link || '#') + '" target="_blank" rel="noopener">ต้นฉบับ ↗</a>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function renderLive() {
+    var grid = document.getElementById('liveGrid');
+    if (!grid) return;
+    var cnt = document.getElementById('liveCount');
+    if (state.liveError && !state.live.length) {
+      grid.innerHTML = '<div class="empty"><div class="empty-icon">📡</div>' +
+        '<h3>ยังโหลดข่าวสดไม่ได้</h3><p>' + esc(state.liveError) + '</p></div>';
+      if (cnt) cnt.textContent = '';
+      return;
+    }
+    var list = liveVisible();
+    grid.innerHTML = list.length
+      ? list.map(liveCardHTML).join('')
+      : '<div class="empty"><p>ไม่พบข่าวที่ค้นหา</p></div>';
+    if (cnt) cnt.textContent = '(' + list.length + ' ข่าวจริง)';
+  }
+
+  function renderSourceChips() {
+    var box = document.getElementById('sourceChips');
+    if (!box) return;
+    var sources = ['ทั้งหมด'];
+    state.live.forEach(function (n) {
+      if (sources.indexOf(n.source) === -1) sources.push(n.source);
+    });
+    box.innerHTML = sources.map(function (s) {
+      return '<button class="chip' + (state.source === s ? ' active' : '') + '" data-source="' + esc(s) + '">' + esc(s) + '</button>';
+    }).join('');
+  }
+
+  /* ---------- เรนเดอร์ ---------- */
+  function tagsHTML(tags, max) {
+    var list = (tags || []).slice();
+    var shown = max ? list.slice(0, max) : list;
+    var html = shown.map(function (t) {
+      return '<button class="tag" data-action="copy-tag" data-tag="' + esc(t) + '" title="แตะเพื่อคัดลอกแท็กนี้">' + esc(t) + '</button>';
+    }).join('');
+    if (max && list.length > max) html += '<span class="tag more">+' + (list.length - max) + '</span>';
+    return html;
+  }
+
+  function cardHTML(n, isPreview) {
+    var img = n.image || placeholderImg(n.category);
+    var acts = isPreview
+      ? '<div class="card-actions">' +
+          '<button class="btn btn-primary" type="button" data-action="copy-draft-short">📋 คัดลอกข่าวสั้น</button>' +
+          '<button class="btn" type="button" data-action="copy-draft-headline">คัดลอกหัวข้อ</button>' +
+          '<button class="btn" type="button" data-action="copy-draft-full">คัดลอกเต็ม</button>' +
+          '<button class="btn" type="button" data-action="copy-draft-tags"># แท็ก (แยกบรรทัด)</button>' +
+        '</div>'
+      : '<div class="card-actions">' +
+          '<button class="btn btn-primary" data-action="copy-short" data-id="' + esc(n.id) + '">📋 คัดลอกข่าวสั้น</button>' +
+          '<button class="btn" data-action="copy-headline" data-id="' + esc(n.id) + '" title="คัดลอกเฉพาะหัวข้อ">หัวข้อ</button>' +
+          '<button class="btn" data-action="copy-full" data-id="' + esc(n.id) + '" title="คัดลอกเนื้อหาเต็ม (ไม่รวมแท็ก)">เต็ม</button>' +
+          '<button class="btn" data-action="copy-tags" data-id="' + esc(n.id) + '" title="คัดลอกแฮชแท็ก แยกบรรทัดละแท็ก"># แท็ก</button>' +
+          '<button class="btn" data-action="open" data-id="' + esc(n.id) + '">อ่านต่อ</button>' +
+        '</div>';
+    return '<article class="card">' +
+      '<div class="card-media">' +
+        '<img src="' + esc(img) + '" alt="' + esc(n.title) + '" loading="lazy">' +
+        '<span class="chip cat" style="--c:' + catColor(n.category) + '">' + esc(n.category) + '</span>' +
+        (n.breaking ? '<span class="badge-live"><span class="pulse"></span> ด่วน</span>' : '') +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="meta">' + fmtDate(n.time) + ' · ' + relTime(n.time) + '</div>' +
+        '<h3 class="card-title">' + esc(n.title) + '</h3>' +
+        '<p class="excerpt">' + esc(n.excerpt || '') + '</p>' +
+        '<div class="tags">' + tagsHTML(n.tags, 6) + '</div>' +
+        acts +
+      '</div>' +
+    '</article>';
+  }
+
+  /* การ์ดข่าวสั้น — เฉพาะหัวข้อ + สรุปที่คัดมา */
+  function shortHTML(n) {
+    return '<article class="short-item">' +
+      '<div class="short-body">' +
+        '<div class="meta"><span class="chip cat mini" style="--c:' + catColor(n.category) + '">' + esc(n.category) + '</span> ' +
+          fmtDate(n.time) + ' · ' + relTime(n.time) + (n.breaking ? ' · <b class="hot">ด่วน</b>' : '') + '</div>' +
+        '<h3 class="short-title">' + esc(n.title) + '</h3>' +
+        '<p class="short-excerpt">' + esc(n.excerpt || '') + '</p>' +
+      '</div>' +
+      '<div class="short-actions">' +
+        '<button class="btn small btn-primary" data-action="copy-short" data-id="' + esc(n.id) + '" title="คัดลอกหัวข้อ+สรุป">📋 ข่าวสั้น</button>' +
+        '<button class="btn small" data-action="copy-headline" data-id="' + esc(n.id) + '" title="คัดลอกเฉพาะหัวข้อ">หัวข้อ</button>' +
+        '<button class="btn small" data-action="copy-tags" data-id="' + esc(n.id) + '" title="คัดลอกแฮชแท็ก แยกกัน"># แท็ก</button>' +
+        '<button class="btn small" data-action="open" data-id="' + esc(n.id) + '">อ่าน</button>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function visibleNews() {
+    var q = state.query.trim().toLowerCase();
+    return state.news.filter(function (n) {
+      if (state.filter !== 'ทั้งหมด' && n.category !== state.filter) return false;
+      if (!q) return true;
+      var hay = (n.title + ' ' + (n.excerpt || '') + ' ' + (n.body || '') + ' ' + (n.tags || []).join(' ')).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+  }
+
+  function renderTicker() {
+    var items = state.live.length
+      ? state.live.slice(0, 6)
+      : state.news.slice().sort(function (a, b) {
+          return (b.breaking ? 1 : 0) - (a.breaking ? 1 : 0);
+        }).slice(0, 6);
+    if (!items.length) items = state.news.slice(0, 6);
+    if (!items.length) {
+      document.getElementById('tickerTrack').innerHTML =
+        '<span class="ticker-item"><span class="ticker-dot"></span>กำลังรอข่าวสด... เปิดเว็บผ่าน server.py เพื่อดึงข่าวจริง</span>';
+      return;
+    }
+    var one = items.map(function (n) {
+      return '<a class="ticker-item" href="#" data-action="open" data-id="' + esc(n.id) + '">' +
+        '<span class="ticker-dot"></span>[' + esc(n.source || 'Fam Ai') + '] ' + esc(n.title) + '</a>';
+    }).join('');
+    document.getElementById('tickerTrack').innerHTML = one + one;
+  }
+
+  function renderHero() {
+    var hero = document.getElementById('hero');
+    /* ข่าวสดจริงมาก่อน — เอาข่าวล่าสุดจากสำนักข่าวขึ้น Hero */
+    if (state.live.length) {
+      hero.hidden = false;
+      var l = state.live[0];
+      hero.innerHTML =
+        '<div class="hero-card">' +
+          '<img src="' + esc(l.image || placeholderImg('สังคม')) + '" alt="' + esc(l.title) + '">' +
+          '<div class="hero-overlay"></div>' +
+          '<div class="hero-body">' +
+            '<div class="hero-badges">' +
+              '<span class="chip cat" style="--c:' + esc(l.sourceColor || '#e11d2e') + '">' + esc(l.source) + '</span>' +
+              '<span class="badge-live"><span class="pulse"></span> LIVE · ข่าวสดจริง</span>' +
+            '</div>' +
+            '<h1>' + esc(l.title) + '</h1>' +
+            '<p>' + esc(l.excerpt || '') + '</p>' +
+            '<div class="hero-meta">' + fmtDate(l.time) + ' · ' + relTime(l.time) + ' · ที่มา : ' + esc(l.source) + '</div>' +
+            '<div class="hero-actions">' +
+              '<button class="btn btn-brand" data-action="copy-short" data-id="' + esc(l.id) + '">📋 คัดลอกข่าวสั้น (หัวข้อ+สรุป)</button>' +
+              '<button class="btn btn-light" data-action="copy-headline" data-id="' + esc(l.id) + '">คัดลอกหัวข้อ</button>' +
+              '<button class="btn btn-light" data-action="copy-tags" data-id="' + esc(l.id) + '"># คัดลอกแท็ก (แยกกัน)</button>' +
+              '<a class="btn btn-ghost" href="' + esc(l.link || '#') + '" target="_blank" rel="noopener">อ่านต้นฉบับ ↗</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      return;
+    }
+    if (!state.news.length) {
+      hero.innerHTML = '';
+      hero.hidden = true;
+      return;
+    }
+    hero.hidden = false;
+    var n = null;
+    for (var i = 0; i < state.news.length; i++) {
+      if (state.news[i].pinned && state.news[i].breaking) { n = state.news[i]; break; }
+    }
+    if (!n) {
+      for (var j = 0; j < state.news.length; j++) {
+        if (state.news[j].pinned) { n = state.news[j]; break; }
+      }
+    }
+    if (!n) {
+      for (var k = 0; k < state.news.length; k++) {
+        if (state.news[k].breaking) { n = state.news[k]; break; }
+      }
+    }
+    if (!n) n = state.news[0];
+
+    var img = n.image || placeholderImg(n.category);
+    hero.innerHTML =
+      '<div class="hero-card">' +
+        '<img src="' + esc(img) + '" alt="' + esc(n.title) + '">' +
+        '<div class="hero-overlay"></div>' +
+        '<div class="hero-body">' +
+          '<div class="hero-badges">' +
+            '<span class="chip cat" style="--c:' + catColor(n.category) + '">' + esc(n.category) + '</span>' +
+            (n.breaking ? '<span class="badge-live"><span class="pulse"></span> LIVE · ข่าวด่วน</span>' : '') +
+            (n.pinned ? '<span class="badge-live" style="background:#0f172a">📌 ปักหมุด</span>' : '') +
+          '</div>' +
+          '<h1>' + esc(n.title) + '</h1>' +
+          '<p>' + esc(n.excerpt || '') + '</p>' +
+          '<div class="hero-meta">' + fmtDate(n.time) + ' · ' + relTime(n.time) + ' · ที่มา : ' + esc(n.source || 'Fam Ai ข่าวสด') + '</div>' +
+          '<div class="hero-actions">' +
+            '<button class="btn btn-brand" data-action="copy-short" data-id="' + esc(n.id) + '">📋 คัดลอกข่าวสั้น (หัวข้อ+สรุป)</button>' +
+            '<button class="btn btn-light" data-action="copy-headline" data-id="' + esc(n.id) + '">คัดลอกหัวข้อ</button>' +
+            '<button class="btn btn-light" data-action="copy-tags" data-id="' + esc(n.id) + '"># คัดลอกแท็ก (แยกกัน)</button>' +
+            '<button class="btn btn-ghost" data-action="open" data-id="' + esc(n.id) + '">อ่านต่อ →</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function renderChips() {
+    var present = {};
+    state.news.forEach(function (n) { present[n.category] = true; });
+    var cats = CAT_ORDER.filter(function (c, idx) { return idx === 0 || present[c]; });
+    Object.keys(present).forEach(function (c) { if (cats.indexOf(c) === -1) cats.push(c); });
+    document.getElementById('chipRow').innerHTML = cats.map(function (c) {
+      return '<button class="chip' + (state.filter === c ? ' active' : '') + '" data-chip="' + esc(c) + '">' + esc(c) + '</button>';
+    }).join('');
+  }
+
+  function renderGrid() {
+    var list = visibleNews();
+    var grid = document.getElementById('newsGrid');
+    grid.className = state.view === 'short' ? 'grid short-mode' : 'grid';
+    grid.innerHTML = list.map(function (n) {
+      return state.view === 'short' ? shortHTML(n) : cardHTML(n, false);
+    }).join('');
+    document.getElementById('emptyState').hidden = list.length > 0;
+    document.getElementById('newsCount').textContent = '(' + list.length + ' ข่าว)';
+  }
+
+  function renderSidebar() {
+    var breaking = state.live.length ? state.live.slice(0, 6) : state.news.filter(function (n) { return n.breaking; });
+    if (!breaking.length) breaking = state.news.slice(0, 5);
+    else breaking = breaking.slice(0, 5);
+    document.getElementById('breakingList').innerHTML = breaking.map(function (n) {
+      return '<li><div><a href="#" data-action="open" data-id="' + esc(n.id) + '">' + esc(n.title) + '</a>' +
+        '<span class="bl-time">' + fmtDate(n.time) + ' · ' + relTime(n.time) + '</span></div></li>';
+    }).join('');
+
+    var gtags = window.FAMAI_GLOBAL_TAGS || [];
+    document.getElementById('tagCloud').innerHTML = gtags.map(function (t) {
+      return '<button class="tag" data-action="copy-tag" data-tag="' + esc(t) + '">' + esc(t) + '</button>';
+    }).join('');
+  }
+
+  function updateStats() {
+    var total = state.news.length;
+    var breaking = state.news.filter(function (n) { return n.breaking; }).length;
+    var totalTags = (window.FAMAI_GLOBAL_TAGS || []).length;
+    document.getElementById('statGrid').innerHTML =
+      '<div class="stat"><b>' + total + '</b><span>ข่าวในระบบ</span></div>' +
+      '<div class="stat"><b>' + breaking + '</b><span>ข่าวด่วน</span></div>' +
+      '<div class="stat"><b>' + state.copyCount + '</b><span>ยอดคัดลอก</span></div>' +
+      '<div class="stat"><b>' + totalTags + '</b><span>แฮชแท็ก</span></div>';
+  }
+
+  function renderTagBand() {
+    var gtags = window.FAMAI_GLOBAL_TAGS || [];
+    document.getElementById('tagBand').innerHTML = gtags.map(function (t) {
+      return '<button class="tag" data-action="copy-tag" data-tag="' + esc(t) + '">' + esc(t) + '</button>';
+    }).join('');
+  }
+
+  function renderAll() {
+    renderTicker();
+    renderHero();
+    renderSourceChips();
+    renderLive();
+    renderChips();
+    renderGrid();
+    renderSidebar();
+    renderTagBand();
+    updateStats();
+  }
+
+  /* ---------- โมดัล ---------- */
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.hidden = false;
+    document.body.classList.add('no-scroll');
+  }
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.hidden = true;
+    var anyOpen = document.querySelector('.modal:not([hidden])');
+    if (!anyOpen) document.body.classList.remove('no-scroll');
+  }
+  function closeAllModals() {
+    ['readModal', 'deskModal'].forEach(closeModal);
+    document.body.classList.remove('no-scroll');
+  }
+
+  /* ---------- หน้าอ่านข่าว ---------- */
+  function openReader(n) {
+    var paras = (n.body || n.excerpt || '').split(/\n{2}/).map(function (p) {
+      return '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    var shareUrl = encodeURIComponent(location.href);
+    var shareText = encodeURIComponent(n.title);
+    document.getElementById('readerContent').innerHTML =
+      '<div class="reader-media">' +
+        '<img src="' + esc(n.image || placeholderImg(n.category)) + '" alt="' + esc(n.title) + '">' +
+        '<span class="chip cat" style="--c:' + catColor(n.category) + '">' + esc(n.category) + '</span>' +
+      '</div>' +
+      '<div class="reader-meta">' + fmtDate(n.time) + ' · ' + relTime(n.time) + ' · ที่มา : ' + esc(n.source || 'Fam Ai ข่าวสด') + '</div>' +
+      '<h1 class="reader-title">' + esc(n.title) + '</h1>' +
+      '<p class="reader-lead">' + esc(n.excerpt || '') + '</p>' +
+      '<div class="reader-body">' + paras + '</div>' +
+      '<div class="tags reader-tags">' + tagsHTML(n.tags) + '</div>' +
+      '<div class="card-actions reader-actions">' +
+        '<button class="btn btn-primary" data-action="copy-short" data-id="' + esc(n.id) + '">📋 คัดลอกข่าวสั้น (หัวข้อ+สรุป)</button>' +
+        '<button class="btn" data-action="copy-headline" data-id="' + esc(n.id) + '">คัดลอกเฉพาะหัวข้อ</button>' +
+        '<button class="btn" data-action="copy-full" data-id="' + esc(n.id) + '">คัดลอกเนื้อหาเต็ม</button>' +
+        '<button class="btn" data-action="copy-tags" data-id="' + esc(n.id) + '">คัดลอกแฮชแท็ก (แยกบรรทัด)</button>' +
+      '</div>' +
+      (n.link ? '<div class="share-row"><a class="btn btn-brand" target="_blank" rel="noopener" href="' + esc(n.link) + '">อ่านต้นฉบับจาก ' + esc(n.source || 'สำนักข่าว') + ' ↗</a></div>' : '') +
+      '<div class="share-row"><span>แชร์ต่อ :</span>' +
+        '<a class="btn share line" target="_blank" rel="noopener" href="https://social-plugins.line.me/lineit/share?url=' + shareUrl + '">LINE</a>' +
+        '<a class="btn share fb" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '">Facebook</a>' +
+        '<a class="btn share x" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=' + shareUrl + '&text=' + shareText + '">X</a>' +
+      '</div>';
+    openModal('readModal');
+  }
+
+  /* ---------- ระบบตัดกอง ---------- */
+  function formToObject() {
+    var editing = state.editingId ? state.news.filter(function (x) { return x.id === state.editingId; })[0] : null;
+    return {
+      id: document.getElementById('dId').value || (editing ? editing.id : uid()),
+      title: document.getElementById('dTitle').value.trim(),
+      excerpt: document.getElementById('dExcerpt').value.trim(),
+      body: document.getElementById('dBody').value.trim(),
+      category: document.getElementById('dCat').value,
+      source: document.getElementById('dSource').value.trim() || 'Fam Ai ข่าวสด',
+      tags: normalizeTags(document.getElementById('dTags').value),
+      image: document.getElementById('dImage').value.trim(),
+      breaking: document.getElementById('dBreaking').checked,
+      pinned: document.getElementById('dPinned').checked,
+      time: editing ? editing.time : new Date().toISOString()
+    };
+  }
+
+  function renderPreview() {
+    var n = formToObject();
+    var box = document.getElementById('deskPreview');
+    if (!n.title && !n.body) {
+      box.innerHTML = '<p class="empty-mini">เริ่มพิมพ์พาดหัวข่าวเพื่อดูตัวอย่างการ์ด...</p>';
+      return;
+    }
+    if (!n.excerpt) n.excerpt = (n.body || '').split(/\n{2}/)[0].slice(0, 140);
+    if (!n.image) n.image = placeholderImg(n.category);
+    box.innerHTML = cardHTML(n, true);
+  }
+
+  function resetForm() {
+    document.getElementById('deskForm').reset();
+    document.getElementById('dId').value = '';
+    document.getElementById('dSource').value = 'Fam Ai ข่าวสด';
+    state.editingId = null;
+    renderPreview();
+    var btn = document.querySelector('#deskForm button[type="submit"]');
+    if (btn) btn.textContent = '💾 บันทึกลงกองบรรณาธิการ';
+  }
+
+  function fillForm(n) {
+    document.getElementById('dId').value = n.id;
+    document.getElementById('dTitle').value = n.title;
+    document.getElementById('dExcerpt').value = n.excerpt || '';
+    document.getElementById('dBody').value = n.body || '';
+    document.getElementById('dCat').value = n.category;
+    document.getElementById('dSource').value = n.source || 'Fam Ai ข่าวสด';
+    document.getElementById('dTags').value = (n.tags || []).join(' ');
+    document.getElementById('dImage').value = n.image && n.image.indexOf('data:') !== 0 ? n.image : (n.image || '');
+    document.getElementById('dBreaking').checked = !!n.breaking;
+    document.getElementById('dPinned').checked = !!n.pinned;
+    state.editingId = n.id;
+    renderPreview();
+    var btn = document.querySelector('#deskForm button[type="submit"]');
+    if (btn) btn.textContent = '💾 อัปเดตข่าวนี้';
+    showToast('โหลดข่าวเข้าฟอร์มตัดกองแล้ว — แก้ไขได้เลย');
+  }
+
+  function submitDesk(e) {
+    e.preventDefault();
+    var n = formToObject();
+    if (!n.title || !n.body) {
+      showToast('กรุณากรอกพาดหัวและเนื้อหาข่าวก่อนบันทึก');
+      return;
+    }
+    if (!n.tags.length) n.tags = suggestTags(n.category);
+    if (!n.excerpt) n.excerpt = (n.body.split(/\n{2}/)[0] || '').slice(0, 140) + '...';
+    if (!n.image) n.image = placeholderImg(n.category);
+
+    var isEdit = !!state.editingId;
+    if (isEdit) {
+      for (var i = 0; i < state.news.length; i++) {
+        if (state.news[i].id === state.editingId) {
+          n.id = state.editingId;
+          n.time = state.news[i].time;
+          state.news[i] = n;
+          break;
+        }
+      }
+    } else {
+      state.news.unshift(n);
+    }
+    saveNews();
+    renderAll();
+    renderDeskList();
+    resetForm();
+    showToast(isEdit ? 'อัปเดตข่าวเรียบร้อย ✓' : 'ตัดข่าวเข้ากองบรรณาธิการเรียบร้อย ✓');
+  }
+
+  function renderDeskList() {
+    var box = document.getElementById('deskList');
+    document.getElementById('deskCount').textContent = '(' + state.news.length + ')';
+    if (!state.news.length) {
+      box.innerHTML = '<p class="empty-mini">ยังไม่มีข่าวในกอง — เริ่มตัดข่าวแรกจากฟอร์มด้านซ้ายได้เลย</p>';
+      return;
+    }
+    box.innerHTML = state.news.map(function (n) {
+      return '<div class="desk-item" data-id="' + esc(n.id) + '">' +
+        '<img src="' + esc(n.image || placeholderImg(n.category)) + '" alt="">' +
+        '<div class="desk-item-info">' +
+          '<strong>' + esc(n.title) + '</strong>' +
+          '<span>' + esc(n.category) + ' · ' + fmtDate(n.time) +
+            (n.breaking ? ' · 🔴 ด่วน' : '') + (n.pinned ? ' · 📌 ปักหมุด' : '') + '</span>' +
+        '</div>' +
+        '<div class="desk-item-actions">' +
+          '<button class="icon-btn" data-action="edit" data-id="' + esc(n.id) + '" title="แก้ไข">✏️</button>' +
+          '<button class="icon-btn" data-action="copy-short" data-id="' + esc(n.id) + '" title="คัดลอกข่าวสั้น (หัวข้อ+สรุป)">📋</button>' +
+          '<button class="icon-btn" data-action="delete" data-id="' + esc(n.id) + '" title="ลบ">🗑️</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function openDesk() {
+    renderDeskList();
+    renderPreview();
+    openModal('deskModal');
+  }
+
+  /* ---------- คัดลอกหลายรายการ ---------- */
+  function copyAllNews() {
+    if (!state.news.length) { showToast('ยังไม่มีข่าวในระบบ'); return; }
+    var text = '📰 Fam Ai ข่าวสด — สรุปข่าวสั้น (' + fmtDate(new Date().toISOString()) + ')\n\n' +
+      state.news.map(function (n, i) {
+        return (i + 1) + '. ' + n.title + '\n' + (n.excerpt || '');
+      }).join('\n\n') +
+      '\n\n————————————\nที่มา : Fam Ai ข่าวสด';
+    copyText(text, 'ข่าวสั้นทั้งหมด (เฉพาะหัวข้อ+สรุป)');
+  }
+
+  /* ---------- อีเวนต์ ---------- */
+  function bindEvents() {
+    /* คลิกแบบ delegate ทั้งหน้า */
+    document.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest ? e.target.closest('[data-action]') : null;
+      if (t) {
+        var action = t.getAttribute('data-action');
+        var id = t.getAttribute('data-id');
+        var item = null;
+        if (id) {
+          for (var i = 0; i < state.news.length; i++) {
+            if (state.news[i].id === id) { item = state.news[i]; break; }
+          }
+          if (!item) {
+            for (var j = 0; j < state.live.length; j++) {
+              if (state.live[j].id === id) { item = state.live[j]; break; }
+            }
+          }
+        }
+        if (action === 'open') {
+          e.preventDefault();
+          if (item) openReader(item);
+          return;
+        }
+        if (action === 'copy-headline') { if (item) copyHeadline(item); return; }
+        if (action === 'copy-short') { if (item) copyShort(item); return; }
+        if (action === 'copy-full') { if (item) copyFull(item); return; }
+        if (action === 'copy-tags') { if (item) copyTagsOf(item, '\n'); return; }
+        if (action === 'copy-tag') {
+          copyText(t.getAttribute('data-tag'), 'แฮชแท็ก (แยกกัน)');
+          return;
+        }
+        if (action === 'copy-draft-headline') { copyHeadline(formToObject()); return; }
+        if (action === 'copy-draft-short') { copyShort(formToObject()); return; }
+        if (action === 'copy-draft-full') { copyFull(formToObject()); return; }
+        if (action === 'copy-draft-tags') { copyTagsOf(formToObject(), '\n'); return; }
+        if (action === 'edit') {
+          if (item) {
+            openDesk();
+            fillForm(item);
+          }
+          return;
+        }
+        if (action === 'delete') {
+          if (item && window.confirm('ลบข่าว "' + item.title + '" ออกจากกองบรรณาธิการ?')) {
+            state.news = state.news.filter(function (x) { return x.id !== item.id; });
+            if (state.editingId === item.id) resetForm();
+            saveNews();
+            renderAll();
+            renderDeskList();
+            showToast('ลบข่าวเรียบร้อยแล้ว');
+          }
+          return;
+        }
+      }
+
+      /* สลับมุมมอง: การ์ดข่าวเต็ม / ข่าวสั้น (เฉพาะหัวข้อ+สรุป) */
+      var viewBtn = e.target && e.target.closest ? e.target.closest('[data-view]') : null;
+      if (viewBtn) {
+        state.view = viewBtn.getAttribute('data-view');
+        var vbtns = document.querySelectorAll('[data-view]');
+        for (var vi = 0; vi < vbtns.length; vi++) {
+          vbtns[vi].classList.toggle('active', vbtns[vi].getAttribute('data-view') === state.view);
+        }
+        renderGrid();
+        return;
+      }
+
+      /* กรองตามสำนักข่าว (LIVE) */
+      var srcBtn = e.target && e.target.closest ? e.target.closest('[data-source]') : null;
+      if (srcBtn) {
+        state.source = srcBtn.getAttribute('data-source');
+        renderSourceChips();
+        renderLive();
+        return;
+      }
+
+      /* ปุ่มปิดโมดัล */
+      var closer = e.target && e.target.closest ? e.target.closest('[data-close]') : null;
+      if (closer) {
+        closeModal(closer.getAttribute('data-close'));
+        return;
+      }
+
+      /* คลิกพื้นหลังโมดัล */
+      if (e.target && e.target.classList && e.target.classList.contains('modal')) {
+        closeModal(e.target.id);
+        return;
+      }
+
+      /* ชิปหมวดหมู่ */
+      var chip = e.target && e.target.closest ? e.target.closest('[data-chip]') : null;
+      if (chip) {
+        setFilter(chip.getAttribute('data-chip'));
+        return;
+      }
+
+      /* เมนูหมวดหมู่ (nav + footer) */
+      var nav = e.target && e.target.closest ? e.target.closest('[data-nav]') : null;
+      if (nav) {
+        setFilter(nav.getAttribute('data-nav'));
+        var mainNav = document.getElementById('mainNav');
+        if (mainNav) mainNav.classList.remove('open');
+      }
+    });
+
+    /* ค้นหา */
+    var searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function () {
+      state.query = this.value;
+      renderGrid();
+      renderLive();
+    });
+    document.getElementById('searchBtn').addEventListener('click', function () {
+      state.query = searchInput.value;
+      renderGrid();
+      renderLive();
+      document.getElementById('news').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    /* ข่าวสดจริง: รีเฟรช + อัปโนัตอัตโนมัติทุก 5 นาที */
+    var btnRefresh = document.getElementById('btnRefreshLive');
+    if (btnRefresh) {
+      btnRefresh.addEventListener('click', function () {
+        state.live = [];
+        state.liveError = null;
+        loadLive(false);
+      });
+    }
+    setInterval(function () { loadLive(true); }, 300000);
+
+    /* ปุ่มหัวเว็บ */
+    document.getElementById('btnOpenDesk').addEventListener('click', openDesk);
+    document.getElementById('btnOpenDesk2').addEventListener('click', openDesk);
+    document.getElementById('btnCopyAll').addEventListener('click', copyAllNews);
+    var btnCopyShortAll = document.getElementById('btnCopyShortAll');
+    if (btnCopyShortAll) btnCopyShortAll.addEventListener('click', copyAllNews);
+    document.getElementById('btnCopyAllTags').addEventListener('click', function () {
+      copyText((window.FAMAI_GLOBAL_TAGS || []).join('\n'), 'แฮชแท็กทั้งหมด (แยกบรรทัด)');
+    });
+
+    /* โลโก้กลับหน้าแรก */
+    document.getElementById('brandHome').addEventListener('click', function (e) {
+      e.preventDefault();
+      setFilter('ทั้งหมด');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* เมนูมือถือ */
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('mainNav').classList.toggle('open');
+    });
+
+    /* ฟอร์มตัดกอง */
+    document.getElementById('deskForm').addEventListener('submit', submitDesk);
+    document.getElementById('btnResetForm').addEventListener('click', function () {
+      resetForm();
+      showToast('ล้างฟอร์มแล้ว');
+    });
+    document.getElementById('btnSuggestTags').addEventListener('click', function () {
+      var cat = document.getElementById('dCat').value;
+      var tags = suggestTags(cat);
+      document.getElementById('dTags').value = tags.join(' ');
+      renderPreview();
+      showToast('ใส่แท็กแนะนำ ' + tags.length + ' แท็กแล้ว ✓');
+    });
+
+    /* พรีวิวสด */
+    ['dTitle', 'dExcerpt', 'dBody', 'dTags', 'dImage'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', renderPreview);
+    });
+    document.getElementById('dCat').addEventListener('change', renderPreview);
+
+    /* อัปโหลดรูป */
+    document.getElementById('dFile').addEventListener('change', function () {
+      var f = this.files && this.files[0];
+      if (!f) return;
+      if (f.size > 1.5 * 1024 * 1024) {
+        showToast('ภาพค่อนข้างใหญ่ แนะนำไม่เกิน 1.5MB เพื่อบันทึกลงเครื่อง');
+      }
+      var reader = new FileReader();
+      reader.onload = function () {
+        document.getElementById('dImage').value = reader.result;
+        renderPreview();
+        showToast('โหลดรูปภาพประกอบข่าวแล้ว ✓');
+      };
+      reader.readAsDataURL(f);
+    });
+
+    /* คัดลอกตามรูปแบบที่เลือก */
+    document.getElementById('btnDeskCopy').addEventListener('click', function () {
+      var n = formToObject();
+      if (!n.title && !n.body) {
+        showToast('ยังไม่มีเนื้อหาให้คัดลอก — กรอกฟอร์มก่อน');
+        return;
+      }
+      var mode = 'short';
+      var radios = document.getElementsByName('copyMode');
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) { mode = radios[i].value; break; }
+      }
+      if (!n.excerpt) n.excerpt = (n.body || '').split(/\n{2}/)[0].slice(0, 140);
+      if (mode === 'headline') copyHeadline(n);
+      else if (mode === 'short') copyShort(n);
+      else if (mode === 'full') copyFull(n);
+      else if (mode === 'tags-lines') copyTagsOf(n, '\n');
+      else if (mode === 'tags-spaces') copyTagsOf(n, ' ');
+      else copyEverything(n);
+    });
+
+    /* ปุ่ม ESC */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAllModals();
+    });
+  }
+
+  function setFilter(cat) {
+    state.filter = cat;
+    renderChips();
+    renderGrid();
+    /* อัปเดต active ของ nav */
+    var links = document.querySelectorAll('[data-nav]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.toggle('active', links[i].getAttribute('data-nav') === cat);
+    }
+    var newsSec = document.getElementById('news');
+    if (newsSec) newsSec.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* ---------- นาฬิกา ---------- */
+  function startClock() {
+    var clockEl = document.getElementById('clock');
+    function tick() {
+      try {
+        clockEl.textContent = new Intl.DateTimeFormat('th-TH', {
+          weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+          hour: '2-digit', minute: '2-digit', second: '2-digit',
+          hour12: false, timeZone: 'Asia/Bangkok'
+        }).format(new Date());
+      } catch (e) {
+        clockEl.textContent = new Date().toLocaleString();
+      }
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  /* ---------- เริ่มต้น ---------- */
+  function init() {
+    state.news = loadNews();
+    state.copyCount = safeGet(COPY_KEY, 0) || 0;
+    bindEvents();
+    startClock();
+    renderAll();
+    loadLive(false);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>
